@@ -15,6 +15,8 @@ from game.models.domain_specific.hamilton_ai_solver import HamiltonSolver
 ## For Play by Deep Neural Network And Deep Neural NEtwork Monte Carlo
 from game.models.domain_specific.dnn_ai_solver import DNNSolver, DNNTrainer
 from game.models.domain_specific.dnn_monte_carlo_ai_solver import DNNMonteCarloSolver
+## For Play by Deep Neural Network Genetic Evolution Solver
+from game.models.domain_specific.dnn_genetic_evolution_ai_solver import DNNGeneticEvolutionSolver, DNNGeneticEvolutionTrainer
 
 solvers = [HumanSolver(),
            RandomSolver(),
@@ -27,9 +29,13 @@ solvers = [HumanSolver(),
            
            DNNSolver(),
            DNNMonteCarloSolver(),
+           
+           DNNGeneticEvolutionSolver()
            ]
 
-trainers = [DNNTrainer()
+trainers = [DNNTrainer(),
+            
+            DNNGeneticEvolutionTrainer()
             ]
 
 
