@@ -12,6 +12,9 @@ from game.models.domain_specific.shortest_path_bfs_ai_solver import ShortestPath
 from game.models.domain_specific.shortest_path_dfs_ai_solver import ShortestPathDFSSolver
 from game.models.domain_specific.longest_path_ai_solver import LongestPathSolver
 from game.models.domain_specific.hamilton_ai_solver import HamiltonSolver
+## For Play by Deep Neural Network And Deep Neural NEtwork Monte Carlo
+from game.models.domain_specific.dnn_ai_solver import DNNSolver, DNNTrainer
+from game.models.domain_specific.dnn_monte_carlo_ai_solver import DNNMonteCarloSolver
 
 solvers = [HumanSolver(),
            RandomSolver(),
@@ -20,10 +23,18 @@ solvers = [HumanSolver(),
            ShortestPathBFSSolver(),
            ShortestPathDFSSolver(),
            LongestPathSolver(),
-           HamiltonSolver()
+           HamiltonSolver(),
+           
+           DNNSolver(),
+           DNNMonteCarloSolver(),
            ]
 
-game_models = solvers
+trainers = [DNNTrainer()
+            ]
+
+
+game_models = solvers + trainers
+
 
 
 def args():
@@ -41,12 +52,17 @@ if __name__ == '__main__':
     for game_model in game_models:
         if game_model.short_name in args and vars(args)[game_model.short_name]:
             selected_game_model = game_model
-           
+    ## If Mode is Training then Load prepare_training_environment() in that model
+    if selected_game_model in trainers:
+        selected_game_model.move(selected_game_model.prepare_training_environment())
+    ## Otherwise start Playing That Game
+    else:       
     ### Setting Game Property
-    from game.game import Game
-    Game(game_model=selected_game_model,
-    fps=Constants.FPS,
-    pixel_size=Constants.PIXEL_SIZE,
-    screen_width=Constants.SCREEN_WIDTH,
-    screen_height=Constants.SCREEN_HEIGHT+Constants.NAVIGATION_BAR_HEIGHT,
-    navigation_bar_height=Constants.NAVIGATION_BAR_HEIGHT)
+        from game.game import Game
+        Game(game_model=selected_game_model,
+             fps=Constants.FPS,
+             pixel_size=Constants.PIXEL_SIZE,
+             screen_width=Constants.SCREEN_WIDTH,
+             screen_height=Constants.SCREEN_HEIGHT+Constants.NAVIGATION_BAR_HEIGHT,
+             navigation_bar_height=Constants.NAVIGATION_BAR_HEIGHT
+             )
