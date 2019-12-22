@@ -4,8 +4,24 @@ from game.helpers.constants import Constants
 
 ## For Play By Human 
 from game.models.general_purpose.human_solver import HumanSolver
+## For Play by Random, MonteCarlo
+from game.models.general_purpose.random_ai_solver import RandomSolver
+from game.models.general_purpose.monte_carlo_ai_solver import MonteCarloSolver
+## For Play by  BFS, DFS, Longest Path, Hamiltonion
+from game.models.domain_specific.shortest_path_bfs_ai_solver import ShortestPathBFSSolver
+from game.models.domain_specific.shortest_path_dfs_ai_solver import ShortestPathDFSSolver
+from game.models.domain_specific.longest_path_ai_solver import LongestPathSolver
+from game.models.domain_specific.hamilton_ai_solver import HamiltonSolver
 
-solvers = [HumanSolver()]
+solvers = [HumanSolver(),
+           RandomSolver(),
+           MonteCarloSolver(),
+           
+           ShortestPathBFSSolver(),
+           ShortestPathDFSSolver(),
+           LongestPathSolver(),
+           HamiltonSolver()
+           ]
 
 game_models = solvers
 

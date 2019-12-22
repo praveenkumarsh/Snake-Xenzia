@@ -7,7 +7,7 @@ Created on Sat Dec 21 23:45:25 2019
 
 class Constants:
 
-    SLITHERIN_NAME = "Snake Master"
+    SLITHERIN_NAME = "Snake Xenzia"
     ICON_PATH = "./assets/snake-master.png"
     FONT = "Arial"
     MODEL_FEATURE_COUNT = 5 #[action_vector, left_neighbor_accessible, top_neighbor_accessible, right_point_accessible, self.get_angle_from_fruit()]
